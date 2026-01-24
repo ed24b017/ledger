@@ -1,0 +1,14 @@
+{
+    "name": "John Doe",
+    "age": 20,
+    "rollNo": "ED24B017",
+    "courses": [
+        "Computer Science",
+        "Data Structures",
+        "Web Development"
+    ],
+    "clubs": [
+        "Coding Club",
+        "Tech Society"
+    ]
+}
