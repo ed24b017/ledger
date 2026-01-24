@@ -13,9 +13,41 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+import base64
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
+
+
+
+
+
+def get_message(service, msg_id):
+    msg = service.users().messages().get(
+        userId="me",
+        id=msg_id,
+        format="full"  
+    ).execute()
+
+    return msg
+
+
+def decode_base64(data):
+    return base64.urlsafe_b64decode(data).decode("utf-8", errors="ignore")
+
+
+def extract_body(message):
+    payload = message["payload"]
+
+    if "parts" in payload:
+        for part in payload["parts"]:
+            if part["mimeType"] == "text/plain":
+                return decode_base64(part["body"]["data"])
+    else:
+        return decode_base64(payload["body"]["data"])
+
+    return ""
+
 
 def main():
     
@@ -38,23 +70,35 @@ def main():
     
     try:
     # Call the Gmail API
-
         # My comments : Okay, we are building a service, and getting the results. 
         service = build("gmail", "v1", credentials=creds)
-        results = service.users().labels().list(userId="me").execute()
-        labels = results.get("labels", [])
-        print(results)
-        if not labels:
-            print("No labels found.")
+        results = service.users().messages().list(userId="me", maxResults=5).execute()
+        messages = results.get("messages", [])
+        if not messages:
+            print("No messages found.")
             return
-        print("Labels:")
-        
-        for label in labels:
-            print(label["name"])
+
+        for m in messages:
+            
+            msg = get_message(service, m["id"])
+
+            headers = msg["payload"]["headers"]
+            
+            subject = next(h["value"] for h in headers if h["name"] == "Subject")
+            sender = next(h["value"] for h in headers if h["name"] == "From")
+
+            body = extract_body(msg)
+
+            print("FROM:", sender)
+            print("SUBJECT:", subject)
+            print("BODY:", body[:500])
+            print("-" * 40)    
+
 
     except HttpError as error:
         # TODO(developer) - Handle errors from gmail API.
         print(f"An error occurred: {error}")
+
 
 
 if __name__ == "__main__":
