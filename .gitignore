@@ -2,3 +2,5 @@ token.json
 credentials.json
 creds.json
 *.env
+backend/data/ledger.db
+backend/data/schema.sql
