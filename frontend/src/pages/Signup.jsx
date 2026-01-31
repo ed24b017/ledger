@@ -1,12 +1,22 @@
 import { useState } from "react";
+import { signup } from "../api/auth.js";
 
 function Signup() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	function handleSubmit(e) {
+	async function handleSubmit(e) {
 		e.preventDefault();
 		console.log({ email, password });
+
+		try {
+			const response = await signup(email, password);
+			console.log("Done, Successful.");
+			alert("OTP has been successfully sent to you email.");
+		} catch (e) {
+			console.error("Sign up Failed");
+			alert(e.message);
+		}
 	}
 	return (
 		<div className="p-6 flex flex-col space-y-6">
@@ -30,7 +40,7 @@ function Signup() {
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 
-				<button type="submit"> Sign Up</button>
+				<button type="submit">Sign Up</button>
 			</form>
 		</div>
 	);

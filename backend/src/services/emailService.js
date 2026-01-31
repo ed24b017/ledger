@@ -1,5 +1,4 @@
 import nodemailer from "nodemailer";
-import { log } from "console";
 
 const transporter = nodemailer.createTransport({
 	host: process.env.SMTP_HOST,
@@ -10,12 +9,13 @@ const transporter = nodemailer.createTransport({
 		pass: process.env.SMTP_PASS,
 	},
 });
+
 async function sendOTPEmail(toEmail, otp) {
 	const mailOption = {
 		from: process.env.SMTP_FROM,
 		to: toEmail,
 		subject: "Verify you email : Ledger",
-		text: `Your verification code is ${otp} \nThis code expires in 15 minutes. Use it fast!!!`,
+		text: `Your verification code is ${otp} \nThis code expires in 15 minutes.`,
 	};
 
 	try {
