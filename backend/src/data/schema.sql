@@ -1,8 +1,4 @@
-DROP TABLE IF EXISTS email_verifications;
-
-DROP TABLE IF EXISTS users;
-
-create table
+       c          create table
     if not exists users (
         id integer primary key autoincrement,
         email text not null unique,

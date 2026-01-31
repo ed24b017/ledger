@@ -5,10 +5,10 @@ import fs from "fs";
 import { log } from "console";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = path.dirname(path.dirname(__filename));
 
-const path_to_db = path.join(__dirname, "../data/ledger.db");
-const path_to_schema = path.resolve("backend/data/schema.sql");
+const path_to_db = path.join(__dirname, "/data/ledger.db");
+const path_to_schema = path.join(__dirname, "../data/schema.sql");
 
 const db = new Database(path_to_db);
 

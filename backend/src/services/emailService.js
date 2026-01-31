@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { log } from "console";
 
 const transporter = nodemailer.createTransport({
 	host: process.env.SMTP_HOST,
@@ -9,7 +10,6 @@ const transporter = nodemailer.createTransport({
 		pass: process.env.SMTP_PASS,
 	},
 });
-
 async function sendOTPEmail(toEmail, otp) {
 	const mailOption = {
 		from: process.env.SMTP_FROM,
@@ -25,8 +25,17 @@ async function sendOTPEmail(toEmail, otp) {
 	}
 }
 
-await transporter.verify();
-console.log("SMTP ready");
+transporter
+	.verify()
+	.then(() => {
+		console.log("SMTP ready");
+	})
+	.catch((err) => {
+		console.error("SMTP connection failed:", err.message);
+		console.log(
+			"Email functionality will not work until SMTP is configured properly",
+		);
+	});
 
 export default {
 	sendOTPEmail,
