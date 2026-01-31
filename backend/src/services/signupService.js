@@ -1,16 +1,16 @@
-import userModel from "../models/userModel";
-import emailVerificationModel from "../models/emailVerificationModel";
-import otpService from "./otpService";
-import emailService from "./emailService";
+import userModel from "../models/userModel.js";
+import emailVerificationModel from "../models/emailVerificationModel.js";
+import otpService from "./otpService.js";
+import emailService from "./emailService.js";
 
 class SignupError extends Error {
 	constructor(message) {
 		super(message);
-		this.name = "SignUp Error";
+		this.name = "SignupError";
 	}
 }
 
-async function signup(email, password_hash) {
+async function signup(email, passwordHash) {
 	// This is for checking if a user already exists in the final users database.
 
 	const existingUser = userModel.findByEmail(email);
@@ -27,7 +27,7 @@ async function signup(email, password_hash) {
 
 	emailVerificationModel.createVerification(
 		email,
-		password_hash,
+		passwordHash,
 		otpHash,
 		expiresAt,
 	);

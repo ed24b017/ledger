@@ -1,6 +1,6 @@
-import userModel from "../models/userModel";
-import emailVerificationModel from "../models/emailVerificationModel";
-import otpService from "../services/otpService";
+import userModel from "../models/userModel.js";
+import emailVerificationModel from "../models/emailVerificationModel.js";
+import otpService from "./otpService.js";
 
 class OtpVerificationError extends Error {
 	constructor(message) {
@@ -21,11 +21,11 @@ function verifyOtp(email, userOtp) {
 		throw new OtpVerificationError("Otp expired");
 	}
 
-	const isValid = otpService.verifyOTP(userOtp, record.otp_hash);
+	const isValid = otpService.verifyOTP(userOtp, record.otpHash);
 	if (!isValid) {
 		throw new OtpVerificationError("Invalid OTP");
 	}
-	userModel.createUser(record.email, record.password_hash);
+	userModel.createUser(record.email, record.passwordHash);
 	emailVerificationModel.deleteVerificationById(record.id);
 
 	return;

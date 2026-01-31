@@ -15,7 +15,7 @@ async function sendOTPEmail(toEmail, otp) {
 		from: process.env.SMTP_FROM,
 		to: toEmail,
 		subject: "Verify you email : Ledger",
-		text: `Your verification code is ${otp} \n This code expires in 15 minutes. Use it fast!!!`,
+		text: `Your verification code is ${otp} \nThis code expires in 15 minutes. Use it fast!!!`,
 	};
 
 	try {
@@ -24,6 +24,9 @@ async function sendOTPEmail(toEmail, otp) {
 		throw new Error("Failed to send OTP");
 	}
 }
+
+await transporter.verify();
+console.log("SMTP ready");
 
 export default {
 	sendOTPEmail,
