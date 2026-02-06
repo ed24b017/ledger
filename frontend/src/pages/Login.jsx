@@ -1,11 +1,22 @@
 import { useState } from "react";
+import { login } from "../api/auth.js";
 
 function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	function handleSubmit(e) {
+	async function handleSubmit(e) {
 		e.preventDefault();
+
+		try {
+			const response = await login(email, password);
+			console.log("Login Done.", response);
+			alert("You have been successfully logged in.");
+		} catch (e) {
+			console.error("Login Failed");
+			alert(e.message);
+		}
+
 		console.log({ email, password });
 	}
 
