@@ -14,7 +14,7 @@ function Home() {
 
 	return (
 		<>
-			<div className="p-6 flex flex-col space-y-6">
+			<div className="p-6 flex flex-col space-y-8">
 				<h1>
 					<TextType
 						text={["Ledger"]}
