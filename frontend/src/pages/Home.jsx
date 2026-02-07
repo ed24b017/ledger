@@ -18,10 +18,10 @@ function Home() {
 			{/* Aurora background - full page */}
 			<div className="fixed inset-0 z-0">
 				<Aurora
-					colorStops={["#7cff67", "#B19EEF", "#5227FF"]}
+					colorStops={["#7caf67", "#B15AAA", "#5117FF"]}
 					blend={0.5}
 					amplitude={1.0}
-					speed={1}
+					speed={0.5}
 				/>
 			</div>
 
