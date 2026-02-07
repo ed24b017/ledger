@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { signup } from "../api/auth.js";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const navigate = useNavigate();
 
 	async function handleSubmit(e) {
 		e.preventDefault();
@@ -11,8 +13,9 @@ function Signup() {
 
 		try {
 			const response = await signup(email, password);
-			console.log("Done, Successful.");
+			console.log("Done, Successful.", response);
 			alert("OTP has been successfully sent to you email.");
+			navigate("/verify-otp");
 		} catch (e) {
 			console.error("Sign up Failed");
 			alert(e.message);

@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { login } from "../api/auth.js";
 
 function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const navigate = useNavigate();
 
 	async function handleSubmit(e) {
 		e.preventDefault();
@@ -11,7 +13,7 @@ function Login() {
 		try {
 			const response = await login(email, password);
 			console.log("Login Done.", response);
-			alert("You have been successfully logged in.");
+			navigate("/landing");
 		} catch (e) {
 			console.error("Login Failed");
 			alert(e.message);

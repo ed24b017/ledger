@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import TextType from "../components/TextType";
 
 function Home() {
 	const navigate = useNavigate();
@@ -14,7 +15,17 @@ function Home() {
 	return (
 		<>
 			<div className="p-6 flex flex-col space-y-6">
-				<h1 className="text-xl font-semibold">Ledger</h1>
+				<h1>
+					<TextType
+						text={["Ledger"]}
+						typingSpeed={100}
+						pauseDuration={3000}
+						showCursor
+						cursorCharacter="_"
+						deletingSpeed={100}
+						cursorBlinkDuration={1}
+					/>
+				</h1>
 				<p className="text-sm text-gray-600">
 					Academic obligations, recorded.
 				</p>
