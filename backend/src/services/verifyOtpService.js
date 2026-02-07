@@ -8,7 +8,6 @@ class OtpVerificationError extends Error {
 		this.name = "OtpVerificationError";
 	}
 }
-
 function verifyOtp(email, userOtp) {
 	const record = emailVerificationModel.findVerificationByEmail(email);
 
