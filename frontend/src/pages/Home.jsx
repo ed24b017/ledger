@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import TextType from "../components/TextType";
 import Aurora from "../components/Aurora";
+import FloatingLines from "../components/FloatingLines";
 
 function Home() {
 	const navigate = useNavigate();
@@ -16,12 +17,17 @@ function Home() {
 	return (
 		<div className="relative h-screen w-screen overflow-hidden bg-black">
 			{/* Aurora background - full page */}
-			<div className="fixed inset-0 z-0">
-				<Aurora
-					colorStops={["#7caf67", "#B15AAA", "#5117FF"]}
-					blend={0.5}
-					amplitude={1.0}
-					speed={0.5}
+			<div className="fixed inset-0 z-0 opacity-40">
+				<FloatingLines
+					enabledWaves={["top", "middle", "bottom"]}
+					// Array - specify line count per wave; Number - same count for all waves
+					lineCount={5}
+					// Array - specify line distance per wave; Number - same distance for all waves
+					lineDistance={5}
+					bendRadius={5}
+					bendStrength={-0.2}
+					interactive={true}
+					parallax={true}
 				/>
 			</div>
 
