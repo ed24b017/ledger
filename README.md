@@ -60,3 +60,12 @@ UX design - How do students correct mistakes easily?
 
 So, that is all that we must be doing tonight. Let's begin. 
 
+
+
+### 08 . 02 . 26 -
+
+This is what I have decided. I am not going to be building this application for an entire user base. What I'll be doing is more personalized. This is going to be only for me, till this point, I mean for me.
+
+And yeah, so there is one rabbit hole.
+1. Attendance issue. I am getting attendance issue. I mean, I cannot explain. So I have to extract data from DigiCampus, which means I need to reverse engineer the application, and then probably grab attendance from that application and put it in mine, which is a lot of work, so I'm putting it for the end.
+So right now I'll be working on the UI and the email part. Let's go!

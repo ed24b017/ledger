@@ -3,6 +3,8 @@ import TextType from "../components/TextType";
 import Aurora from "../components/Aurora";
 import FloatingLines from "../components/FloatingLines";
 
+
+
 function Home() {
 	const navigate = useNavigate();
 
